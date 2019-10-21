@@ -1,4 +1,5 @@
-//Архитектура на проекта:
+//#region Архитектура на проекта:
+use bank
 
 var dbw = {
     //Служители
@@ -433,5 +434,199 @@ dbw.insertClient({
     phoneNumber: '08090149',
 })
 
+
+//#endregion
+//#endregion
+//#region Бизнес заявки част 1
+
+//#region 1. Да се създаде листинг на имената на всички отдели в банката 
+
+db.departments.find().forEach(function(department){
+    db.departmentNamesAgregation.insert({
+        departmentName: department.name
+    });    
+});
+
+db.departmentNamesAgregation.find().pretty()
+
+//or
+
+db.departments.find().forEach(function(department){
+    print(department.name);
+});
+
+//#endregion
+
+//#region 2. 
+/*
+Да се създаде листинга на месечните възнаграждения на всички служители, в листинга е
+необходимо да присъстват двете имена на служителя и неговата заплата
+*/
+
+var generateSalaries = function(){
+    db.employees.find().forEach(function(employee){
+        var newSalary = Math.floor(Math.random() * 10000) + 450;
+        db.employees.update({_id: employee._id}, {$set:{salary: newSalary}});
+    })
+}
+
+generateSalaries();
+
+db.employees.find().forEach(function(employee){
+    db.employeeSalaryAgregation.insert({
+        firstName: employee.firstName,
+        lastName: employee.lastName,
+        salary: employee.salary
+    })
+})
+
+db.employeeSalaryAgregation.find().pretty()
+
+//#endregion
+
+//#region 3.
+/*
+Да се създаде листинг на всички служители в банката в листинга трябва да присъстват
+двете имена на служителите и новогенерирани E-mail адреси, които да се състоят от
+конкатенирани първото и второ име на служителя разделени с точка. Имената на
+служителите трябва да бъдат с малки букни в мейла. Домейна на компанията е
+bankoftomarow.bg
+*/
+
+var generateEmailForEmployee = function(employee, domein){
+    return employee.firstName.toLowerCase() +'.' +employee.lastName.toLowerCase() +'@'+ domein;
+}
+
+db.employees.find().forEach(function(employee){
+    var newEmail = generateEmailForEmployee(employee, 'bankoftomarow.bg');
+    db.employees.update({_id:employee._id},{$set:{email:newEmail} });
+
+    db.employeesEmailAgregatio.insert({
+        firstName: employee.firstName,
+        lastName: employee.lastName,
+        email: newEmail
+    })
+})
+
+db.employeesEmailAgregatio.find().pretty()
+
+
+//#endregion
+
+//#region 4.
+/*
+Намерете всички служители които банката дефинира като старши служители. Старши
+служители са всички които работят в компанията от 5 години.
+*/
+var generateExperience = function(){
+    db.employees.find().forEach(function(employee){
+        var newExperience = Math.floor(Math.random() * 30);
+        db.employees.update({_id: employee._id}, {$set:{experience: newExperience}});
+    })
+}
+
+generateExperience();
+
+db.employees.find({
+    experience: {$gte : 5}
+}).pretty()
+
+//#endregion
+
+//#region 5.
+/*
+Намерете всички служители чиито първи имена започват с буквата S
+ */
+
+dbw.insertEmployee({
+    firstName: 'Simeon',
+    lastName: 'Ivanov',
+    address:'str. Duruburu 123',
+    email: 'ii@brb.bg',
+    phoneNumber: '08090849',
+    position: 'banker',
+    departmentName: 'Corporate'
+})
+
+dbw.insertEmployee({
+    firstName: 'Stephan',
+    lastName: 'Ivanov',
+    address:'str. Duruburu 124',
+    email: 'ii@brb.bg',
+    phoneNumber: '08090849',
+    position: 'banker',
+    departmentName: 'Corporate'
+})
+
+db.employees.find({
+    firstName: { $regex : '^S'}
+})
+
+//#endregion
+
+//#region 6.
+/*
+Намерете всички чуждестранни служители. Чуждестранни са тези служители които не са
+родени в България.
+*/
+
+var generateBirthCountries = function(){
+    db.employees.find().forEach(function(employee){
+        var countries = ['Bulgaria','Bulgaria','Bulgaria', 'Namibia', 'Urugvai']
+        var countryIndex = Math.floor(Math.random()*countries.length);
+        db.employees.update({_id:employee._id},{$set:{birthCountry: countries[countryIndex]}})
+    })    
+}
+
+generateBirthCountries();
+
+db.employees.find({birthCountry:{$nin:['Bulgaria']}}).pretty()
+
+//#endregion
+
+//#region 7.
+/*
+Намерете всички служители чиите имена (първо / второ или допълнително съдържат
+буквата l)
+*/
+
+dbw.insertEmployee({
+    firstName: 'Lorensto',
+    lastName: 'Ivanov',
+    address:'str. Duruburu 124',
+    email: 'ii@brb.bg',
+    phoneNumber: '08090849',
+    position: 'banker',
+    departmentName: 'Corporate'
+})
+
+dbw.insertEmployee({
+    firstName: 'Ivan',
+    lastName: 'Lalalov',
+    address:'str. Duruburu 124',
+    email: 'ii@brb.bg',
+    phoneNumber: '08090849',
+    position: 'banker',
+    departmentName: 'Corporate'
+})
+
+dbw.insertEmployee({
+    firstName: 'Dragan',
+    lastName: 'Ivanov',
+    additionalName: 'Leketo',
+    address:'str. Duruburu 124',
+    email: 'ii@brb.bg',
+    phoneNumber: '08090849',
+    position: 'banker',
+    departmentName: 'Corporate'
+})
+
+db.employees.find({$or:[
+    {firstName: {$regex:'l',$options:'i'}},
+    {lastName: {$regex:'l',$options:'i'}},
+    {additionalName: {$regex:'l',$options:'i'}}
+]}).pretty()
+
+//#endregion
 
 //#endregion
