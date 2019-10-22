@@ -438,7 +438,6 @@ dbw.insertClient({
 //#endregion
 //#endregion
 //#region Бизнес заявки част 1
-
 //#region 1. Да се създаде листинг на имената на всички отдели в банката 
 
 db.departments.find().forEach(function(department){
@@ -626,6 +625,96 @@ db.employees.find({$or:[
     {lastName: {$regex:'l',$options:'i'}},
     {additionalName: {$regex:'l',$options:'i'}}
 ]}).pretty()
+
+//#endregion
+
+//#endregion
+
+//#region Бизнес заявки част 2
+//#region 1. Да се реализират примерни документи в колекцията.
+
+var updateEmployeeDepartment = function(){
+    db.employees.find().forEach(function(employee){
+        db.employees.update({_id: employee._id},
+            { $set:{departmentHistory: [{
+                department: employee.departmentId,
+                dateAssumed: new Date("2019-08-22")
+            }] }
+        })
+    })
+}
+
+updateEmployeeDepartment();
+
+
+
+//#endregion
+//#region 2.
+/*
+Да се рализират листинг на служителите, които са работили в повече от един отдел в
+рамките на последните два месеца
+*/
+dbw.updateEmpoloyyeDeparment= function(employeeId,newDeparment){
+
+    var newDepartmentName = db.departments.find({_id: newDeparment})[0].name;
+
+    if(!newDepartmentName){
+        print('Please enter valid department id!');
+        return;
+    }
+
+    var employee = db.employees.find({_id:employeeId})[0];
+    if(!employee){
+        print('Please enter valid employee id!');
+        return;
+    }
+    var oldDepartmentHistory = employee.departmentHistory;
+
+    oldDepartmentHistory.push({
+        department: newDeparment,
+        dateAssumed: new Date()
+    })
+
+    db.employees.update({_id: employeeId},{
+        $set:{
+            departmentHistory: oldDepartmentHistory,
+            departmentId: newDeparment,
+            departmentName: newDepartmentName
+
+        }
+    })
+}
+
+dbw.updateEmpoloyyeDeparment(ObjectId("5dadc592a2315817eaf48f8e"),ObjectId("5dad6893fb29009febf5757f"));
+dbw.updateEmpoloyyeDeparment(ObjectId("5dadde8bc8f6b07b46c0ce38"), ObjectId("5dad68d4fb29009febf57582"));
+
+var comparisonDate = new Date();
+comparisonDate.setDate(comparisonDate.getDate()-62);
+db.employees.find({'departmentHistory.dateAssumed':{$gte: comparisonDate}}).forEach(function(employee){
+    positionCouner = 0;
+    employee.departmentHistory.forEach(function(history){
+        if(history.dateAssumed>=comparisonDate){
+            positionCouner++;
+        }
+    })
+    if(positionCouner>=2){
+        if(!employee){
+            print("Booboo!");
+        }
+        db.employeeDepartmentAgregation.insert(employee);
+    }
+})
+
+db.employeeDepartmentAgregation.find().pretty();
+//#endregion
+
+//#region 3.
+/*
+3. Да се реализира листинг на служителите които са работили само в един отдел откакто са
+част от структурата на компанията.
+*/
+
+db.employees.find({"departmentHistory":{$size: 1}}).pretty();
 
 //#endregion
 
