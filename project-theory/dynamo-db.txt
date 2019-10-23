@@ -1,0 +1,19 @@
+Dynamo Db  „u „…„ƒ„|„…„s„p „x„p NoSQL „q„p„x„y „t„p„~„~„y, „{„€„‘„„„€ „„€„t„t„Œ„‚„w„p „{„p„{„„„€ „t„€„{„…„}„u„~„„„~„€ „q„p„x„y„‚„p„~„y „ƒ„„„‚„…„{„„„…„‚„y, 
+„„„p„{„p „y „ƒ„„„‚„…„{„„„…„‚„y „€„„ „„„y„„p „{„|„„‰-„ƒ„„„€„z„~„€„ƒ„„. 
+„S„‘ „ƒ„u „„‚„u„t„|„p„s„p „{„p„„„€ „‰„p„ƒ„„ „„€„‚„„„†„€„|„y„€„„„€ „€„„ „…„u„q „…„ƒ„|„…„s„y „~„p Amazon.
+„O„ƒ„~„€„r„~„y„„„u „~„€„ƒ„y„„„u„|„y „~„p „t„p„~„~„y „ƒ„p „„„p„q„|„y„ˆ„y, „u„|„u„}„u„~„„„y „y „p„„„‚„y„q„…„„„y. 
+„P„€„t„€„q„~„€ „~„p „t„‚„…„s„y „ƒ„y„ƒ„„„u„}„y „€„„ „t„p„~„~„y „€„ƒ„~„€„r„~„p„„„p „s„‚„…„„p „€„„ „t„p„~„~„y „r Dynamo Db „ƒ„p „„„p„q„|„y„ˆ„y„„„u.
+ „S„u „„‚„u„t„ƒ„„„p„r„|„‘„r„p„„ „ƒ„q„€„‚ „€„„ „u„|„u„}„u„~„„„y. 
+„E„|„u„}„u„~„„„y„„„u „ƒ„p „s„‚„…„„p „€„„ „p„„„‚„y„q„…„„„y, „{„€„y„„„€ „ƒ„p „€„‚„s„p„~„y„x„y„‚„p„~„y „„€„t „u„t„y„~ „€„q„‹ „{„|„„‰. 
+„H„p „‚„p„x„|„y„{„p „€„„ „q„p„x„y„„„u „t„p„~„~„y „q„p„x„y„‚„p„~„y „~„p „ƒ„‡„u„}„p, „r Dynamo Db „u„|„u„}„u„~„„„y„„„u „€„„ „u„t„~„p „„„p„q„|„y„ˆ„p „~„u „ƒ„|„u„t„r„p„„
+ „„„€„‰„~„p „ƒ„„„‚„…„{„„„…„‚„p
+ „y „}„€„s„p„„ „t„p „y„}„p„„ „r„ƒ„‘„{„p„{„r„€ „‚„p„x„~„€„€„q„‚„p„x„y„u „€„„ „p„„„‚„y„q„…„„„y, „{„p„„„€ „u„t„y„~„ƒ„„„r„u„~„€„„„€ „y„x„y„ƒ„{„r„p„~„u „u
+ „t„p „y„}„p„„ „u„t„y„~„u„~ „„Œ„‚„r„y„‰„u„~ „{„|„„‰ „x„p „„„p„q„|„y„ˆ„p„„„p „r „{„€„‘„„„€ „ƒ„u „~„p„}„y„‚„p„„. 
+„@„„„‚„y„q„…„„„p „u „ƒ„p„}„€„ƒ„„„€„‘„„„u„|„~„p „u„t„y„~„y„ˆ„p „€„„ „t„p„~„~„y, „{„€„‘„„„€ „~„‘„}„p „~„…„w„t„p „€„„ „t„p„„Œ„|„~„y„„„u„|„~„€ „‚„p„x„q„y„r„p„~„u.
+„P„Œ„‚„r„y„‰„~„y„‘„„ „{„|„„‰ „~„p „u„t„y„~ „u„|„u„}„u„~„„ „„„‚„‘„q„r„p „t„p „ƒ„u „ƒ„Œ„ƒ„„„€„y „€„„ „u„t„y„~ „y„|„y „t„r„p „ƒ„{„p„|„p„‚„~„y „p„„„‚„y„q„…„„„p, 
+„{„€„y„„„€ „r„x„u„„„y „x„p„u„t„~„€ „„„‚„‘„q„r„p „t„p „y„}„p„„ „…„~„y„{„p„|„~„p „ƒ„„„€„z„~„€„ƒ„„. 
+„H„p „r„Œ„„„‚„u„Š„~„€ „‚„p„x„„‚„u„t„u„|„u„~„y„u „~„p „t„p„~„~„y „ƒ„u „„€„|„x„r„p„„ „{„p„{„„„€ „‡„p„Š„„„p„q„|„y„ˆ„y, „„„p„{„p „y B-„t„Œ„‚„r„u„„„p.
+Dynamo Db „u „t„€„ƒ„„„Œ„„~„€ „‚„u„Š„u„~„y„u „x„p „„‚„€„q„|„u„}„y, „{„€„y„„„€ „ƒ„u „~„…„w„t„p„‘„„ „€„„ „|„u„ƒ„~„p „x„p „„€„|„x„r„p„~„u „y 
+„q„Œ„‚„x„p „x„p „~„p„ƒ„„„‚„€„z„r„p„~„u NoSQL „q„p„x„p „t„p„~„~„y. „N„p„ƒ„„„‚„€„z„{„p„„„p „y „„€„t„‚„Œ„w„{„p„„„p „~„p „r„Œ„„„‚„u„Š„~„p„„„p „p„‚„‡„y„„„u„{„„„…„‚„p 
+„ƒ„u „„€„u„}„p „€„„ Amazon, „~„p „x„p „ƒ„}„u„„„{„p „~„p „„„€„r„p „„€„„„‚„u„q„y„„„u„|„‘ „~„‘„}„p „{„€„~„„„‚„€„| „r„Œ„‚„‡„… „~„u„‘, 
+„{„€„u„„„€ „„‚„p„r„y Dynamo Db „~„u„„€„t„‡„€„t„‘„‹„p „…„ƒ„|„…„s„p, „{„€„s„p„„„€ „ƒ„u „y„x„y„ƒ„{„r„p „„€ „s„Œ„†„{„p„r„€ „‚„u„Š„u„~„y„u „~„p „{„€„~„{„‚„u„„„u„~ „„‚„€„q„|„u„}.
