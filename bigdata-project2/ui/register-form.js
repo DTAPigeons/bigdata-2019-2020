@@ -1,6 +1,19 @@
-//var myWallet = require('./wallet');
-var fs = require('fs');
-var crypto = require('crypto')
+var currencyManager = require('../managers/currency-manager');
+
+var currencyCheckList = document.getElementById("currencies");
+var currencyList = currencyManager.GetCurrencyList();
+
+currencyList.forEach(function(currency){
+    var checkBox = document.createElement('input');
+    checkBox.type = 'checkbox';
+    checkBox.name = 'checkbox';
+    checkBox.id = currency;
+    var currencyText = document.createTextNode(" "+currency);
+    currencyCheckList.appendChild(checkBox);
+    currencyCheckList.appendChild(currencyText);
+    linebreak = document.createElement("br");
+    currencyCheckList.appendChild(linebreak);
+})
 
 var register = function(){
     var data = {
@@ -9,25 +22,20 @@ var register = function(){
     };
     data.email = document.getElementById("email").value;
     data.password = document.getElementById("password").value;
-    if(fs.existsSync("my-wallet")){
-        window.alert("wallet exists");
-        return;
+    var checkedCurrencies = GetCheckedCurrencyIndexes();
+
+    currencyManager.CreateWalletsForUser(data, checkedCurrencies);
+}
+
+
+var GetCheckedCurrencyIndexes = function(){
+    var checkCurrencies = [];
+    var checkBoxList = currencyCheckList.getElementsByTagName('input');
+    for(var i = 0; i<checkBoxList.length;i++){
+        if(checkBoxList[i].checked){
+            checkCurrencies.push(i);
+        }
     }
-    createDir("my-wallet");
-    createWallet("my-wallet", data);
-    console.log(done);
-}
 
-var createDir = function(path){
-    fs.mkdir( path, { recursive: true }, (err) => {
-        if (err) throw err;
-      })
-}
-
-var createWallet = function(path, data){
-    var wallet = { 
-       id: require("crypto").createHmac("sha256", data.password).update(data.email).digest("hex")
-    };
-
-    fs.writeFileSync(path+"/wallet.json", JSON.stringify(wallet));
+    return checkCurrencies;
 }
