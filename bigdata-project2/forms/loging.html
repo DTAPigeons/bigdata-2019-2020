@@ -6,13 +6,30 @@
   </head>
   <body>
     <h1>Unichain</h1>
-    <div id="form-panel">
-        <form onsubmit="login()">
-            Id: <input type="text" id="id">
+    <div id="form-panel" style="display: inline-block; min-width: 300px; margin-left: 10 px; margin-right: 20px; border-style: solid; padding: 5px 5px 5px 5px;">
+        <form id="input-form">
+            <span id="input-label"> Enter Id:</span> <input type="text" id="input-text">
             <input type="submit">
           </form>
     </div>
+    <div id="user-info-panel"style="display: inline-block; min-width: 300px; border-style: solid; padding: 5px 5px 5px 5px;">
+    <span id="user-id">133333333333333333</span>
+    <br>
+    <span id="selected-currency-name">BGN</span>
+    <br>
+    <span id="selected-currency-amount">10</span>
+    </div>
+    <div style="display: block; margin-top: 20px;"></div>
+    <div id="currency-panel" style="display: inline-block; min-width: 300px; margin-left: 10 px;  margin-right: 20px; border-style: solid; padding: 5px 5px 5px 5px;">
+    <ul id="currency-list"></ul>
+    </div>
+    <div id="user-wallets-panel"style="display: inline-block;  min-width: 300px; border-style: solid; padding: 5px 5px 5px 5px;">
+      <ul id="wallets-list"></ul>
+      </div>
     <!-- You can also require other files to run in this process -->
-    <script src="../login.js"></script>
+    <script src="../ui/loged-user-panel.js"></script>
+    <script src="../ui/input-panel.js"></script>
+    <script src="../ui/currency-panel.js"></script>
+    <script src="../ui/wallets-panel.js"></script>
   </body>
 </html>

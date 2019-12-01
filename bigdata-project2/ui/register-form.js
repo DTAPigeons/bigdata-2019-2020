@@ -15,7 +15,8 @@ currencyList.forEach(function(currency){
     currencyCheckList.appendChild(linebreak);
 })
 
-var register = function(){
+var register = function(e){
+    e.preventDefault();
     var data = {
         email: '',
         password: ''
