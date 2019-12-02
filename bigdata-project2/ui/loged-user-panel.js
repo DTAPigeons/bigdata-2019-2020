@@ -1,8 +1,8 @@
 var UserManager = require("../managers/user-manager");
 
-var userIdLable = document.getElementById("user-id");
-var selectedCurrencyLable = document.getElementById("selected-currency-name");
-var selectedCurrencyAmountLable = document.getElementById("selected-currency-amount");
+var userIdLable;
+var selectedCurrencyLable;
+var selectedCurrencyAmountLable;
 
 var logedUser = {};
 var selectedCurrency = "-------";
@@ -14,7 +14,7 @@ var LogUser = function(){
 }
 
 
-var SelectCurrency = function(currency){
+var CurrencySelected = function(currency){
     selectedCurrency = currency;
     var wallet = logedUser.GetCurrencyWallet(currency);
     if(wallet){
@@ -32,7 +32,14 @@ var VisualiseData = function(){
     selectedCurrencyAmountLable.innerText = selectedCurrencyAmount;
 }
 
+var SetDomElements = function(doc){
+    userIdLable = doc.querySelector("#user-id");
+    selectedCurrencyLable = doc.querySelector("#selected-currency-name");
+    selectedCurrencyAmountLable = doc.querySelector("#selected-currency-amount");
+}
+
 module.exports = {
     LogUser: LogUser,
-    SelectCurrency: SelectCurrency
+    CurrencySelected: CurrencySelected,
+    SetDomElements: SetDomElements
 };

@@ -1,8 +1,8 @@
 var CurrencyManager = require('../managers/currency-manager');
-var LogedUserPanel = require("../ui/loged-user-panel");
-var WalletsPanel = require("../ui/wallets-panel");
 
-var currencyListPanel = document.getElementById("currency-list");
+
+var currencyListPanel;
+var currencySelectedListener;
 
 var Reset = function(){
     var currencyList = CurrencyManager.GetCurrencyList();
@@ -11,18 +11,24 @@ var Reset = function(){
         currencyItem.innerText = currency;
         var onclickEvent = {
             selectedCurrency : currency,
-            onClick: function(){ SelectCurrency(this.selectedCurrency);}
+            onClick: function(){ currencySelectedListener(this.selectedCurrency);}
         }
         currencyItem.addEventListener("click", function(){ onclickEvent.onClick()});
         currencyListPanel.appendChild(currencyItem);
     })
 }
 
-var SelectCurrency = function(currency){
-    LogedUserPanel.SelectCurrency(currency);
-    WalletsPanel.CurrencySelected(currency);
+
+var SetDomElements = function(doc){
+    currencyListPanel = doc;
+}
+
+var SetCurrencySelectedListener = function(lister){
+    currencySelectedListener = lister;
 }
 
 module.exports = {
-    Reset: Reset
+    Reset: Reset,
+    SetCurrencySelectedListener: SetCurrencySelectedListener,
+    SetDomElements: SetDomElements
 }

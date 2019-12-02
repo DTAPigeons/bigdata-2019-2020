@@ -1,5 +1,5 @@
 var UserManager = require('../managers/user-manager');
-var walletsListPanel = document.getElementById('wallets-list');
+var walletsListPanel;
 
 
 var CurrencySelected = function(currency){
@@ -47,6 +47,12 @@ var WalletSelected = function(data){
     window.alert(data.userId+" "+data.currency);
 }
 
+
+var SetDomElements = function(doc){
+    walletsListPanel = doc;
+}
+
 module.exports = {
-    CurrencySelected: CurrencySelected
+    CurrencySelected: CurrencySelected,
+    SetDomElements: SetDomElements
 }
