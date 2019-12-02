@@ -23,10 +23,10 @@ var CreateWalletsForUser = function(userData, currencyIndexes){
     currencyIndexes.forEach(currencyIndexe => {
         var currencyId = cryptoHelper.sha256.Create(userID + currencyList[currencyIndexe]);
         var currencyName = currencyList[currencyIndexe];
-        var currencyWallet = new CurrencyModel(currencyName, currencyId, 1000);
         var walletPath = userPath + "/" + currencyList[currencyIndexe] + ".json";
+        var currencyWallet = new CurrencyModel(currencyName, currencyId, 1000, walletPath);
 
-        fs.writeFileSync(walletPath,JSON.stringify(currencyWallet));
+        SaveWalletToFile(currencyWallet);
     });
 }
 
@@ -46,16 +46,24 @@ var LoadWalletsForUser = function(userId){
     var userDir = walletsDir + userId;
     var walletFiles = fs.readdirSync(userDir);
     walletFiles.forEach(function(file){
-        var raw = fs.readFileSync(userDir + "/" + file);
-        var wallet = JSON.parse(raw);
+        var walletPath = userDir + "/" + file;
+        var raw = fs.readFileSync(walletPath);
+        var walletData = JSON.parse(raw);
+        var wallet = new CurrencyModel(walletData.currency, walletData.id, walletData.amount, walletPath);
         wallets.push(wallet);
     })
 
     return wallets;
 }
 
+var SaveWalletToFile = function(wallet){
+    var fileData = wallet.GetFileSaveData();
+    fs.writeFileSync(fileData.path,JSON.stringify(fileData.object));
+}
+
 module.exports = {
     GetCurrencyList : GetCurrencyList,
     CreateWalletsForUser : CreateWalletsForUser,
-    LoadWalletsForUser : LoadWalletsForUser
+    LoadWalletsForUser : LoadWalletsForUser,
+    SaveWalletToFile: SaveWalletToFile
 };

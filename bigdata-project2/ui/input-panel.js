@@ -5,7 +5,9 @@ var walletsPath;
 var inputForm;
 var inputLabel;
 var inputText;
+var submitButton;
 var inputListener;
+var toWalletLabel;
 
 var loginListener = function(e){
     e.preventDefault();
@@ -13,9 +15,7 @@ var loginListener = function(e){
     var userPath = walletsPath + id;
     if(fs.existsSync(userPath)){
         UserManager.LogInUser(id);
-        inputLabel.innerText = "Enter amount: ";
-        inputText.value = "";
-        inputForm.addEventListener("submit", transactionListener);
+        Refresh();
         inputListener();
     }
     else{
@@ -23,19 +23,31 @@ var loginListener = function(e){
     }
 }
 
-
-var transactionListener = function(e){
-    e.preventDefault();
-    var amount = inputText.value;
-    window.alert(amount)
+var EnableTransaction = function(transactionListener, toWalletId){
+    Refresh();
+    inputLabel.innerText = "Enter amount: ";
+    inputText.value = "";
+    toWalletLabel.innerText = "Send money to: " + toWalletId;
+    submitButton.disabled = false;
+    inputForm.addEventListener("submit", function(event){
+        event.preventDefault();
+        var amount = inputText.value;
+        transactionListener(amount);
+    });
 }
+
 
 var SetDomElements = function(doc){
     inputForm = doc;
-    inputLabel = doc.querySelector("#input-label");
-    inputText = doc.querySelector("#input-text");
-
+    SetChildElements();    
     inputForm.addEventListener("submit", loginListener);
+}
+
+var SetChildElements = function(){
+    inputLabel = inputForm.querySelector("#input-label");
+    inputText = inputForm.querySelector("#input-text");
+    submitButton = inputForm.querySelector("#submit-button");
+    toWalletLabel = inputForm.querySelector("#to-wallet-lable");
 }
 
 var SetInputListener = function(lister){
@@ -46,10 +58,25 @@ var SetWalletPath = function(path){
     walletsPath = path;
 }
 
+var Refresh = function(){
+    inputLabel.innerText = "";
+    toWalletLabel.innerText = "";
+    inputText.value = "";
+    submitButton.disabled = true;
+
+    var formReset = inputForm.cloneNode(true);
+    inputForm.parentNode.replaceChild(formReset, inputForm);
+    inputForm = formReset;
+    SetChildElements();
+
+}
+
 module.exports = {
     SetDomElements: SetDomElements,
     SetInputListener: SetInputListener,
-    SetWalletPath: SetWalletPath
+    SetWalletPath: SetWalletPath,
+    EnableTransaction: EnableTransaction,
+    Refresh: Refresh
 };
 
 
